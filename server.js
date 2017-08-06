@@ -1,5 +1,5 @@
 const path = require('path')
-const xps = require("./xps2.js")
+const xps = require("./xps.js")
 const app = xps.app();
 
 xps.go(app,
