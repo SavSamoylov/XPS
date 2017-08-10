@@ -52,7 +52,7 @@ let XPS = function(){
         if(xps_ViewEngine === "express-handlebars"){
           app.engine('handlebars', exphbs({defaultLayout: 'main'}));
           app.set('view engine', 'handlebars');
-          console.log("Express-Handlebars Set")
+          console.log("++ View Engine: ", xps_ViewEngine)
         }
 
       }
@@ -81,7 +81,7 @@ let XPS = function(){
 
         // parse an HTML body into a string
         app.use(bodyParser.text({ type: 'text/html' }))
-        console.log("All body-parser options used")
+        console.log("++ Body-Parser: json, urlencoded, text, raw")
 
       } else if (xps_BPType === "object"){
 
@@ -89,19 +89,19 @@ let XPS = function(){
 
           if (xps_BP[i].toLowerCase().trim() === "json"){
             app.use(bodyParser.json({ type: 'application/*+json' }))
-            console.log("JSON")
+            console.log("++ Body-Parser: json")
           }
           if (xps_BP[i].toLowerCase().trim() === "urlencoded"){
             app.use(bodyParser.urlencoded({ extended: false }))
-            console.log("URL")
+            console.log("++ Body-Parser: urlencoded")
           }
           if (xps_BP[i].toLowerCase().trim() === "raw"){
             app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
-            console.log("RAW")
+            console.log("++ Body-Parser: raw")
           }
           if (xps_BP[i].toLowerCase().trim() === "text"){
             app.use(bodyParser.text({ type: 'text/html' }))
-            console.log("TEXT")
+            console.log("++ Body-Parser: text")
           }
 
         }
@@ -118,25 +118,21 @@ let XPS = function(){
 
       let PORT = process.env.PORT || obj.port;
       let PORT_Type = typeof PORT;
-      console.log(PORT);
-      console.log(PORT_Type);
-
 
       if (PORT_Type === "string" || PORT_Type === "number"){
         if (isNaN(PORT)) {
           PORT = parseInt(PORT)
           app.listen(PORT, ()=>{
-            console.log("Server started on PORT: %s", PORT)
           })
         } else {
           app.listen(PORT, ()=>{
-            console.log("String Server started on PORT: %s", PORT)
           })
         }
       } else {
         console.log("ERROR: The port property only takes a string or an integer value. Example ('3000' or 3000)")
         return;
       }
+      console.log("++ Server started on PORT: %s", PORT)
 
     }
 
@@ -147,7 +143,7 @@ let XPS = function(){
 
     if(obj.methodOverride){
       app.use(methodOverride('_method'));
-      console.log("Has method-override")
+      console.log("++ method-override: true")
     }
 
 
@@ -160,6 +156,7 @@ let XPS = function(){
       if (xps_HttpLogger === "morgan"){
         app.use(morgan("dev"))
       }
+      console.log("++ HTTP Logger: ",xps_HttpLogger)
     }
 
     //==================================================================================================
@@ -168,7 +165,7 @@ let XPS = function(){
 
     if(obj.favicon){
       app.use(favicon(path.join(__dirname,'public/favicon.ico')))
-      console.log("Has Favicon")
+      console.log("++ favicon: true")
     }
 
     //==================================================================================================
@@ -180,6 +177,7 @@ let XPS = function(){
 
     function f_xpsStatic(directoryName){
       app.use(express.static(directoryName.trim().replace(/\s/g,'')));
+      console.log("++ Static View Directory: ", directoryName)
     }
 
 
