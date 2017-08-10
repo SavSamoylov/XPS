@@ -23,6 +23,5 @@ xps.go(app,
   }
 )
 
-  app.get('/', (req,res)=>{
-    res.render("index")
-  })
+let routes = require(path.join(__dirname, "controller/routes.js"))
+app.use(routes)
