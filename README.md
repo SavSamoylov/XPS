@@ -1,4 +1,5 @@
-# XPS
+![XPS Logo](https://i.imgur.com/SYQgH6d.png)
+
 A module for streamlining [Express](http://www.expressjs.com) development.
 
 ## Getting started
