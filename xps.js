@@ -67,7 +67,7 @@ let XPS = function(){
 
       let xps_BP = obj.bodyParse;
       let xps_BPType = typeof xps_BP;
-      console.log(xps_BP)
+
 
       if(xps_BP === true){
         // parse various different custom JSON types as JSON
@@ -81,6 +81,7 @@ let XPS = function(){
 
         // parse an HTML body into a string
         app.use(bodyParser.text({ type: 'text/html' }))
+        console.log("All body-parser options used")
 
       } else if (xps_BPType === "object"){
 
