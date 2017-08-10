@@ -9,6 +9,7 @@ xps.go(app,
     bodyParse: ["json", "raw", "urlencoded", "text"], // TRUE or [ARRAY]  - Pass an object to set the exact parse methods you'd want to use.
     port: 3000, // Either an INT or STRING
     methodOverride: true, // app.use(methodOverride('_method')) ... Doesn't override HTTP Headers... because I don't know what that is.
+    httpLogger: "morgan",
     favicon: true, // Will look inside the
 
     // Can add some other common Middleware.
@@ -16,6 +17,7 @@ xps.go(app,
     // -Cookie-Session
     // -Cookie-Parser
     // -Session
+    // - etc
     // -------------------------------------
     // Open to further Development
 

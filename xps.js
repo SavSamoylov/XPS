@@ -1,9 +1,10 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const methodOverride = require('method-override')
+const express = require('express');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 const exphbs  = require('express-handlebars');
-const favicon = require('serve-favicon')
+const favicon = require('serve-favicon');
 const path = require("path");
+const morgan = require("morgan");
 
 let XPS = function(){
 
@@ -148,6 +149,17 @@ let XPS = function(){
       console.log("Has method-override")
     }
 
+
+    //==================================================================================================
+    // Set Morgan Command Line Logger
+    //==================================================================================================
+
+    if(obj.httpLogger){
+      let xps_HttpLogger = obj.httpLogger.toLowerCase().trim();
+      if (xps_HttpLogger === "morgan"){
+        app.use(morgan("dev"))
+      }
+    }
 
     //==================================================================================================
     // Set Favicon
