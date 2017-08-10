@@ -10,11 +10,7 @@ xps.go(app,
     port: 3000, // Either an INT or STRING
     methodOverride: true, //Doesn't override HTTP Headers... because I don't know what that is.
     httpLogger: "morgan",
-<<<<<<< HEAD
     favicon: true, // Will look inside the public directory
-=======
-    favicon: true, // Will look inside the public directory.
->>>>>>> 25879f2f3aefdf91eb61af55ce33bb33e7f9b650
   }
 )
 
