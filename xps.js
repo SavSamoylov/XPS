@@ -1,5 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
+const exphbs  = require('express-handlebars');
+const favicon = require('serve-favicon')
+const path = require("path");
 
 let XPS = function(){
 
@@ -27,10 +31,30 @@ let XPS = function(){
         }
 
       } else {
-        console.log("ERROR: The staticView property only takes  a string or an array of strings value.");
+        console.log("ERROR: The staticView property only takes a string or an array of strings value.");
         return
       }
 
+
+    }
+
+    //==================================================================================================
+    // Set View Engine - Just express-handlebars for now.
+    //==================================================================================================
+
+    if(obj.viewEngine){
+      let xps_ViewEngine = obj.viewEngine.toLowerCase().trim();
+      let xps_ViewEngineType = typeof xps_ViewEngine;
+
+      if(xps_ViewEngineType === "string"){
+
+        if(xps_ViewEngine === "express-handlebars"){
+          app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+          app.set('view engine', 'handlebars');
+          console.log("Express-Handlebars Set")
+        }
+
+      }
 
     }
 
@@ -116,10 +140,29 @@ let XPS = function(){
 
 
     //==================================================================================================
+    // Set Method-Override
+    //==================================================================================================
+
+    if(obj.methodOverride){
+      app.use(methodOverride('_method'));
+      console.log("Has method-override")
+    }
+
+
+    //==================================================================================================
+    // Set Favicon
+    //==================================================================================================
+
+    if(obj.favicon){
+      app.use(favicon(path.join(__dirname,'public/favicon.ico')))
+      console.log("Has Favicon")
+    }
+
+    //==================================================================================================
     // XPS Functions
     //==================================================================================================
 
-    
+
     // -------- SET STATIC DIRECTORIES
 
     function f_xpsStatic(directoryName){
